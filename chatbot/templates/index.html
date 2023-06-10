@@ -11,15 +11,7 @@
 
   <body>
 
-  <ul class="nav">
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">Home</a>
 
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled">About Us</a>
-  </li>
-</ul>
 
 <style>
     .jumbotron {
@@ -39,6 +31,8 @@
     }
   </style>
 
+
+
 <div class="jumbotron text-center">
     <h1 class="display-4">AI-Sha : The Chatbot </h1>
     <p class="lead">  Powered by OpenAI</p>
@@ -49,11 +43,12 @@
       $('.jumbotron').css('opacity', '1');
     });
   </script>
+<br>
+<br>
 
   <div class = "chat">
     <pre id="prompt">
-                            AI-Sha : Heyy, how are you?
-                            You : Hi, I am fine.
+
     </pre>
   </div>
 
@@ -76,25 +71,28 @@
     console.log(csrfmiddlewaretoken)
 
 const fetchData = async(myPrompt) => {
-    // using fetch is best and easy
-    const response = await fetch("http://127.0.0.1:8000/api", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRFToken": csrfmiddlewaretoken,
-        },
-        body: JSON.stringify({
-            prompt: myPrompt,
-        }),
-    });
-    const res = await response.json();
-    return res;
+      let data = new FormData();
+      data.append('prompt', myPrompt);;
+      data.append('csrfmiddlewaretoken', csrfmiddlewaretoken);
+
+      let headers = {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrfmiddlewaretoken,
+      };
+
+      let a = await fetch("/api", {
+        method: 'POST',
+        body: data,
+        headers: headers,
+      });
+      let r = await a.json();
+      return r;
 }
 
 submit.addEventListener("click",async() =>{
 let myPrompt = document.innerText + "\n You:" + typedPrompt.value + "\n AI-Sha:"
 document.getElementById("prompt").innerText = myPrompt
-response = await fetchData(typedPrompt.value)
+response = await fetchData(myPrompt)
 document.getElementById("prompt").innerText += response["choices"][0]
 
 })
