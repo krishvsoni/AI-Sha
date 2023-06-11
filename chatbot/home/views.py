@@ -11,8 +11,7 @@ openai.api_key = "" # your API key
 def chat(request):
     return render(request,"index.html")
 
-def about(request):
-    return render(request,"about.html")
+
 
 def chatAPI(request):
     if request.method == "POST":
