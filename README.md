@@ -14,11 +14,3 @@ AI-Sha Chatbot is an AI-powered chatbot built using OpenAI's GPT-3.5 language mo
 - Django: The chatbot is built as a Django web application, providing a web-based interface for users to interact with.
 - HTML/CSS: The chatbot's user interface is designed using HTML and CSS to provide an intuitive and visually appealing experience.
 
-## Getting Started
-
-To set up AI-Sha Chatbot locally, follow these steps:
-
-1. Clone the repository:
-
-```shell
-git clone https://github.com/your-username/ai-sha-chatbot.git
